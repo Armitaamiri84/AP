@@ -53,3 +53,14 @@ def read_input():
                 'request_count':request_count
             })
 
+
+#finding appropriate trains for request
+def find_matching_trains(trains, request):
+    result = []
+    for tr in trains:
+        if tr["source"] == request["source"] and tr["destination"] == request["destination"]:
+            if tr["time_min"] >= request["time_min"] and tr["capacity"] >= request["count"]:
+                result.append(tr)
+    return result
+
+
