@@ -1,66 +1,53 @@
-import sys
-from unittest import result
-
-import requests
-
-
 def time_to_minutes(time):
-    hour,minute = time.split(':')
+    hour, minute = time.split(':')
     return int(hour)*60 + int(minute)
 
 
 def read_input():
-    #including number of trains and number of requests
-    first_line=input()
-
-    #[number_of_trains,number_of_requests]
-    parts=first_line.split()
-
+    first_line = input()
+    parts = first_line.split()
     number_of_trains = int(parts[0])
     number_of_requests = int(parts[1])
 
-    #----------read trains info----------"
-    trains=[]
-
-    for i in range(number_of_trains):
-        line=input()
-        parts=line.split()
-
-        train_name=parts[0]
-        train_source=parts[1]
-        train_destination=parts[2]
-        train_time=parts[3]
-        train_capacity=parts[4]
+    trains = []
+    for _ in range(number_of_trains):
+        line = input()
+        parts = line.split()
+        train_name = parts[0]
+        train_source = parts[1]
+        train_destination = parts[2]
+        train_time = parts[3]
+        train_capacity = int(parts[4])
 
         trains.append({
-            'train_name':train_name,
-            'train_source':train_source,
-            'train_destination':train_destination,
-            'train_time':train_time,
-            'train_capacity':train_capacity
+            'name': train_name,
+            'source': train_source,
+            'destination': train_destination,
+            'time': train_time,
+            'time_min': time_to_minutes(train_time),
+            'capacity': train_capacity
         })
 
-        #----------read requests info----------
-    requests=[]
-
-    for i in range(number_of_requests):
-        line=input()
-        parts=line.split()
-        request_source=parts[0]
-        request_destination=parts[1]
-        request_time=parts[2]
-        request_count=parts[3]
+    requests = []
+    for _ in range(number_of_requests):
+        line = input()
+        parts = line.split()
+        req_source = parts[0]
+        req_destination = parts[1]
+        req_time = parts[2]
+        req_count = int(parts[3])
 
         requests.append({
-            'request_source':request_source,
-            'request_destination':request_destination,
-            'request_time':request_time,
-            'request_count':request_count
+            'source': req_source,
+            'destination': req_destination,
+            'time': req_time,
+            'time_min': time_to_minutes(req_time),
+            'count': req_count
         })
 
-    return trains,requests
+    return trains, requests
 
-#finding appropriate trains for request
+
 def find_matching_trains(trains, request):
     result = []
     for tr in trains:
@@ -70,11 +57,12 @@ def find_matching_trains(trains, request):
     return result
 
 
-def process_all_requests(requests,trains):
-    result=[]
+def process_all_requests(trains, requests):
+    results = []
     for request in requests:
-        result.append(find_matching_trains(trains, request))
-    return result
+        results.append(find_matching_trains(trains, request))
+    return results
+
 
 
 def print_output(results):
@@ -85,9 +73,9 @@ def print_output(results):
 
 
 def main():
-   trains,requests = read_input()
-   results = process_all_requests(trains, requests)
-   print_output(results)
+    trains, requests = read_input()
+    results = process_all_requests(trains, requests)
+    print_output(results)
 
 
 if __name__ == "__main__":
