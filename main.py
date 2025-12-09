@@ -75,4 +75,10 @@ def process_all_requests(requests,trains):
     return result
 
 
+def print_output(results):
+    for match_list in results:
+        for tr in match_list:
+            print(f'{tr["name"]} {tr["time"]} {tr["capacity"]}')
+        print("----------")
+
 
