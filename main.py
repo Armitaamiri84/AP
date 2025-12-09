@@ -41,22 +41,24 @@ def read_input():
         })
 
         #----------read requests info----------
-        requests=[]
-        for i in range(number_of_requests):
-            line=input()
-            parts=line.split()
-            request_source=parts[0]
-            request_destination=parts[1]
-            request_time=parts[2]
-            request_count=parts[3]
+    requests=[]
 
-            requests.append({
-                'request_source':request_source,
-                'request_destination':request_destination,
-                'request_time':request_time,
-                'request_count':request_count
-            })
+    for i in range(number_of_requests):
+        line=input()
+        parts=line.split()
+        request_source=parts[0]
+        request_destination=parts[1]
+        request_time=parts[2]
+        request_count=parts[3]
 
+        requests.append({
+            'request_source':request_source,
+            'request_destination':request_destination,
+            'request_time':request_time,
+            'request_count':request_count
+        })
+
+    return trains,requests
 
 #finding appropriate trains for request
 def find_matching_trains(trains, request):
@@ -82,3 +84,11 @@ def print_output(results):
         print("----------")
 
 
+def main():
+   trains,requests = read_input()
+   results = process_all_requests(trains, requests)
+   print_output(results)
+
+
+if __name__ == "__main__":
+    main()
