@@ -1,11 +1,14 @@
+#converting time to minutes
 def time_to_minutes(time):
     hour, minute = time.split(':')
     return int(hour)*60 + int(minute)
 
 
+#reading input from cmd
 def read_input():
     first_line = input()
     parts = first_line.split()
+    #0:number_of_trains 1:number_of_requests
     number_of_trains = int(parts[0])
     number_of_requests = int(parts[1])
 
