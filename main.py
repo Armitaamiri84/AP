@@ -9,6 +9,7 @@ def read_input():
     number_of_trains = int(parts[0])
     number_of_requests = int(parts[1])
 
+    #----------saving trains info----------
     trains = []
     for _ in range(number_of_trains):
         line = input()
@@ -28,6 +29,7 @@ def read_input():
             'capacity': train_capacity
         })
 
+    #----------saving requests info----------
     requests = []
     for _ in range(number_of_requests):
         line = input()
@@ -48,6 +50,7 @@ def read_input():
     return trains, requests
 
 
+#find possible train for one request
 def find_matching_trains(trains, request):
     result = []
     for tr in trains:
@@ -57,6 +60,7 @@ def find_matching_trains(trains, request):
     return result
 
 
+#find all possible trains for all requests
 def process_all_requests(trains, requests):
     results = []
     for request in requests:
