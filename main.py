@@ -1,4 +1,8 @@
 import sys
+from unittest import result
+
+import requests
+
 
 def time_to_minutes(time):
     hour,minute = time.split(':')
@@ -62,5 +66,13 @@ def find_matching_trains(trains, request):
             if tr["time_min"] >= request["time_min"] and tr["capacity"] >= request["count"]:
                 result.append(tr)
     return result
+
+
+def process_all_requests(requests,trains):
+    result=[]
+    for request in requests:
+        result.append(find_matching_trains(trains, request))
+    return result
+
 
 
